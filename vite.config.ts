@@ -41,7 +41,7 @@ export default defineConfig(({ mode }) => {
             './DashboardPage': './src/pages/DashboardPage.vue',
             './SearchPage': './src/pages/SearchPage.vue',
             './ShowDetailsPage': './src/pages/ShowDetailsPage.vue',
-            './styles': './src/style.css',
+            './styles': './src/load-styles.ts',
           },
           shared: {
             vue: { singleton: true, requiredVersion: '3.5.13' },

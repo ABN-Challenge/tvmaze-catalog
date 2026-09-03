@@ -7,7 +7,7 @@ import ResponsiveSearch from 'tvmaze_ui/ResponsiveSearch'
 
 /**
  * Mirrors the host shell (tvmaze App.vue): AppShell + header search + footer.
- * Page content stays in the story body (PageContainer, SearchInput, etc.).
+ * Page content stays in the story body (PageContainer, results, etc.).
  */
 export const withAppChrome: Decorator = () => ({
   components: { AppShell, AppHeader, AppFooter, ResponsiveSearch },

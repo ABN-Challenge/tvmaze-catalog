@@ -2,7 +2,6 @@ import preview from '../../.storybook/preview'
 import { mocked } from 'storybook/test'
 import { toRefs } from 'vue'
 import PageContainer from 'tvmaze_ui/PageContainer'
-import SearchInput from 'tvmaze_ui/SearchInput'
 import ShowCardGrid from 'tvmaze_ui/ShowCardGrid'
 import EmptyState from 'tvmaze_ui/EmptyState'
 import ErrorBanner from 'tvmaze_ui/ErrorBanner'
@@ -20,7 +19,7 @@ const meta = preview.meta({
     docs: {
       description: {
         story:
-          'TVmaze search (`/search/shows?q=`). Live stories hit the public API; mocked stories cover loading, error, empty, and success. Chrome matches the host (AppShell / ResponsiveSearch); page body uses SearchInput.',
+          'TVmaze search (`/search/shows?q=`). Live stories hit the public API; mocked stories cover loading, error, empty, and success. Chrome matches the host (AppShell / header ResponsiveSearch).',
       },
     },
   },
@@ -33,7 +32,6 @@ const meta = preview.meta({
   render: (args) => ({
     components: {
       PageContainer,
-      SearchInput,
       ShowCardGrid,
       EmptyState,
       ErrorBanner,
@@ -57,7 +55,6 @@ const meta = preview.meta({
     },
     template: `
       <PageContainer class="space-y-6">
-        <SearchInput id="tvmaze-page-search" v-model="query" label="Search query" />
         <p class="text-sm text-[var(--tv-muted)]">
           GET /search/shows?q={{ encodeQuery(query.trim() || '') }}
         </p>
@@ -73,7 +70,7 @@ const meta = preview.meta({
         <EmptyState
           v-else-if="!query.trim()"
           title="Enter a query"
-          message="Use the control or input above to search TVmaze."
+          message="Use the header search or the query control to search TVmaze."
         />
         <EmptyState
           v-else-if="status === 'ready' && (!data || data.length === 0)"
