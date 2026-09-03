@@ -53,7 +53,7 @@ npm run build-storybook
 
 GitHub Pages serves **Storybook as the site root**. Stories under `API/*` call the live TVmaze API (index / search / details) with controls for page, embeds, and raw JSON preview. Please respect [TVmaze rate limits](https://www.tvmaze.com/api#rate-limiting).
 
-Storybook resolves `tvmaze_ui/*` via aliases into the sibling `tvmaze-ui` source tree (no remotes required for Storybook).
+Storybook resolves `tvmaze_ui/*` via aliases into the sibling `tvmaze-ui` source tree (no remotes required for Storybook). Tailwind v4 only auto-scans this repo, so `.storybook/preview.css` adds `@source '../../tvmaze-ui/src'` so UI utility classes (SearchInput, AppHeader, etc.) are generated.
 
 ## Production
 

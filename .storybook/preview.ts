@@ -3,7 +3,7 @@ import addonA11y from '@storybook/addon-a11y'
 import addonDocs from '@storybook/addon-docs'
 import addonVitest from '@storybook/addon-vitest'
 import { sb } from 'storybook/test'
-import 'tvmaze_ui/styles'
+import './preview.css'
 
 sb.mock(import('../src/domain/api.ts'), { spy: true })
 
