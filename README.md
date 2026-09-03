@@ -18,16 +18,13 @@ Owns the TVmaze API client, genre grouping, rating sort, and Pinia catalog store
 
 - Node.js `20.19.0+` (Storybook 10)
 - npm `10.2.4+`
-- Sibling checkout of `tvmaze-ui` at `../tvmaze-ui` (for Storybook path aliases)
-- `tvmaze-ui` running locally on port `5001` when developing the federation remote (or a deployed remote entry)
+- Sibling checkout of `tvmaze-ui` at `../tvmaze-ui` (for Storybook path aliases and unit-test aliases)
 
 ## Local development
 
-```bash
-# terminal 1 — UI remote
-cd ../tvmaze-ui && npm run dev
+This remote defaults to the **deployed** `tvmaze_ui` entry, so it runs on its own:
 
-# terminal 2 — catalog remote
+```bash
 npm install
 npm run dev
 ```
@@ -35,11 +32,18 @@ npm run dev
 Dev server: [http://localhost:5002](http://localhost:5002)  
 Remote entry: `http://localhost:5002/remoteEntry.js`
 
-Optional env override (see `.env.example`):
+When changing `tvmaze-ui` source, start it on `:5001` and use local mode:
 
 ```bash
-VITE_UI_REMOTE_URL=http://localhost:5001/remoteEntry.js
+# terminal 1 — UI remote
+cd ../tvmaze-ui && npm run dev
+
+# terminal 2 — catalog remote in local mode
+npm run dev:local
 ```
+
+To make that the default for your checkout, copy `.env.example` to `.env.local`
+(gitignored) and uncomment the override.
 
 ```bash
 npm test

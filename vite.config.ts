@@ -14,11 +14,11 @@ export default defineConfig(({ mode }) => {
     Boolean(process.env.STORYBOOK) || process.argv.some((arg) => arg.includes('storybook'))
   const disableFederation = isTest || isStorybook
   const base = isProd && !isStorybook ? '/tvmaze-catalog/' : '/'
+  // Default to the deployed design system so this remote runs on its own.
+  // Point VITE_UI_REMOTE_URL at localhost (or use `npm run dev:local`) when
+  // working on tvmaze-ui source alongside it.
   const uiRemote =
-    env.VITE_UI_REMOTE_URL ||
-    (isProd
-      ? 'https://abn-challenge.github.io/tvmaze-ui/remoteEntry.js'
-      : 'http://localhost:5001/remoteEntry.js')
+    env.VITE_UI_REMOTE_URL || 'https://abn-challenge.github.io/tvmaze-ui/remoteEntry.js'
 
   return {
     base,

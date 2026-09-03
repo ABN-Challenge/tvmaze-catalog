@@ -12,6 +12,7 @@
   },
   "scripts": {
     "dev": "vite --port 5002 --strictPort",
+    "dev:local": "VITE_UI_REMOTE_URL=http://localhost:5001/remoteEntry.js vite --port 5002 --strictPort",
     "build": "vue-tsc -b && vite build",
     "preview": "vite preview --port 5002 --strictPort",
     "test": "vitest run",
