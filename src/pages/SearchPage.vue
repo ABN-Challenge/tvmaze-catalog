@@ -48,7 +48,12 @@ function showLink(show: Show) {
 <template>
   <div data-testid="search-page" class="contents">
     <PageContainer class="space-y-6">
-      <SearchInput v-model="query" @submit="onSubmit" />
+      <SearchInput
+        id="tvmaze-page-search"
+        v-model="query"
+        label="Search shows"
+        @submit="onSubmit"
+      />
 
       <ErrorBanner
         v-if="store.searchStatus === 'error'"

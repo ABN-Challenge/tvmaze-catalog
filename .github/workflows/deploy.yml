@@ -34,8 +34,13 @@ jobs:
         with:
           node-version: '20.19.0'
           cache: npm
-          cache-dependency-path: tvmaze-catalog/package-lock.json
+          cache-dependency-path: |
+            tvmaze-catalog/package-lock.json
+            tvmaze-ui/package-lock.json
       - run: npm ci
+      - name: Install tvmaze-ui dependencies
+        working-directory: tvmaze-ui
+        run: npm ci
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
       - run: npm run lint

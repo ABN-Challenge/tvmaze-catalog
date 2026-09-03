@@ -57,7 +57,7 @@ const meta = preview.meta({
     },
     template: `
       <PageContainer class="space-y-6">
-        <SearchInput v-model="query" label="Search query" />
+        <SearchInput id="tvmaze-page-search" v-model="query" label="Search query" />
         <p class="text-sm text-[var(--tv-muted)]">
           GET /search/shows?q={{ encodeQuery(query.trim() || '') }}
         </p>
