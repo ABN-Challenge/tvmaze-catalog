@@ -44,6 +44,7 @@ jobs:
       - name: Install Playwright Chromium
         run: npx playwright install --with-deps chromium
       - run: npm run lint
+      - run: npm run test:coverage
       - run: npm test
       - run: npm run build
         env:

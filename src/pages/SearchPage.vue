@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { computed, watch } from 'vue'
+import { computed, onUnmounted, watch } from 'vue'
 import { useRoute } from 'vue-router'
 import PageContainer from 'tvmaze_ui/PageContainer'
 import ShowCardGrid from 'tvmaze_ui/ShowCardGrid'
@@ -38,8 +38,13 @@ watch(
   { immediate: true },
 )
 
+onUnmounted(() => {
+  clearTimeout(debounceTimer)
+  store.cancelSearch()
+})
+
 function showLink(show: Show) {
-  return `#/shows/${show.id}`
+  return `/shows/${show.id}`
 }
 </script>
 

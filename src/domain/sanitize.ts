@@ -14,7 +14,8 @@ export function sanitizeSummaryHtml(html: string | null | undefined): string {
         const el = child as HTMLElement
         const tag = el.tagName.toLowerCase()
         if (!ALLOWED_TAGS.has(tag)) {
-          const text = document.createTextNode(el.textContent ?? '')
+          // An element's textContent is always a string, never null.
+          const text = document.createTextNode(el.textContent as string)
           el.replaceWith(text)
           continue
         }

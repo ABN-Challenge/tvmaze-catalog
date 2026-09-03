@@ -11,7 +11,7 @@ import type { Show } from '../domain/types'
 const store = useCatalogStore()
 
 function showLink(show: Show) {
-  return `#/shows/${show.id}`
+  return `/shows/${show.id}`
 }
 
 onMounted(() => {

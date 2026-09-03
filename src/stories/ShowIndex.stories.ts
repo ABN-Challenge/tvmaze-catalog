@@ -50,7 +50,7 @@ const meta = preview.meta({
       )
 
       const groups = computed(() => groupShowsByGenre(data.value ?? []))
-      const showLink = (show: { id: number }) => `#/shows/${show.id}`
+      const showLink = (show: { id: number }) => `/shows/${show.id}`
 
       return { args, status, error, data, groups, showLink, reload }
     },

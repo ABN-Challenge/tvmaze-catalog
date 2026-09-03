@@ -15,7 +15,7 @@ function queryFromRoute(q: unknown): string {
   return String(q ?? '')
 }
 
-const headerQuery = ref(queryFromRoute(route.query.q))
+const headerQuery = ref<string>(queryFromRoute(route.query.q))
 
 watch(
   () => [route.path, route.query.q] as const,

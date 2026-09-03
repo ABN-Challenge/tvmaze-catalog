@@ -4,6 +4,7 @@ import vue from '@vitejs/plugin-vue'
 import tailwindcss from '@tailwindcss/vite'
 import { federation } from '@module-federation/vite'
 import { fileURLToPath, URL } from 'node:url'
+import { uiExposes } from './uiAliases'
 
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), '')
@@ -41,6 +42,7 @@ export default defineConfig(({ mode }) => {
             './DashboardPage': './src/pages/DashboardPage.vue',
             './SearchPage': './src/pages/SearchPage.vue',
             './ShowDetailsPage': './src/pages/ShowDetailsPage.vue',
+            './NotFoundPage': './src/pages/NotFoundPage.vue',
             './styles': './src/load-styles.ts',
           },
           shared: {
@@ -54,6 +56,9 @@ export default defineConfig(({ mode }) => {
       alias: {
         '@': fileURLToPath(new URL('./src', import.meta.url)),
       },
+      // The sibling tvmaze-ui checkout has its own copies; a second Vue or
+      // vue-router instance breaks provide/inject across the boundary.
+      dedupe: ['vue', 'vue-router', 'pinia'],
     },
     server: {
       port: 5002,
@@ -82,6 +87,21 @@ export default defineConfig(({ mode }) => {
     test: {
       environment: 'jsdom',
       globals: true,
+      // Pages import the design system through federation specifiers.
+      alias: uiExposes,
+      coverage: {
+        provider: 'v8',
+        reporter: ['text', 'html'],
+        include: ['src/domain/**/*.ts', 'src/pages/**/*.vue'],
+        // Type-only module with no runtime code.
+        exclude: ['src/domain/types.ts'],
+        thresholds: {
+          lines: 100,
+          functions: 100,
+          branches: 100,
+          statements: 100,
+        },
+      },
     },
   }
 })

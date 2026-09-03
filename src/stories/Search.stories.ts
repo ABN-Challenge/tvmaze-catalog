@@ -49,7 +49,7 @@ const meta = preview.meta({
       )
 
       const encodeQuery = encodeURIComponent
-      const showLink = (show: { id: number }) => `#/shows/${show.id}`
+      const showLink = (show: { id: number }) => `/shows/${show.id}`
 
       return { args, query, status, error, data, reload, encodeQuery, showLink }
     },

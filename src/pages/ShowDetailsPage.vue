@@ -38,6 +38,15 @@ function load() {
   }
 }
 
+/** A deep-linked details page has no in-app history to return to. */
+function goBack() {
+  if (window.history.state?.back) {
+    router.back()
+    return
+  }
+  void router.push({ name: 'dashboard' })
+}
+
 onMounted(load)
 watch(showId, load)
 </script>
@@ -45,7 +54,7 @@ watch(showId, load)
 <template>
   <div data-testid="details-page" class="contents">
     <PageContainer class="space-y-4">
-      <Button variant="ghost" @click="router.back()">← Back</Button>
+      <Button variant="ghost" data-testid="details-back" @click="goBack()">← Back</Button>
 
       <ErrorBanner
         v-if="store.detailsStatus === 'error'"
@@ -56,13 +65,13 @@ watch(showId, load)
 
       <LoadingState v-if="store.detailsStatus === 'loading'" message="Loading show details…" />
 
-      <ShowHero v-else-if="heroShow" :show="heroShow" :cast-names="castNames" />
-
       <EmptyState
-        v-else-if="store.detailsStatus === 'ready'"
+        v-else-if="store.detailsStatus === 'not-found'"
         title="Show not found"
-        message="This show could not be loaded from TVmaze."
+        message="This show does not exist on TVmaze, or it has been removed."
       />
+
+      <ShowHero v-else-if="heroShow" :show="heroShow" :cast-names="castNames" />
     </PageContainer>
   </div>
 </template>

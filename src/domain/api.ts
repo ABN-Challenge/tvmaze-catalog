@@ -1,7 +1,6 @@
 import type { SearchResult, Show } from './types'
 
 const API_BASE = 'https://api.tvmaze.com'
-const USER_AGENT = 'ABN-Challenge-TVmaze/1.0'
 
 export class TvmazeApiError extends Error {
   constructor(
@@ -18,7 +17,6 @@ async function request<T>(path: string, init?: RequestInit): Promise<T> {
     ...init,
     headers: {
       Accept: 'application/json',
-      'User-Agent': USER_AGENT,
       ...(init?.headers ?? {}),
     },
   })
